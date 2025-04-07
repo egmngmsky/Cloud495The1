@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import authOptions from '@/lib/auth';
+import { authOptions } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import { User } from '@/models/User';
 import { Item } from '@/models/Item';
@@ -39,7 +39,7 @@ export async function DELETE(
     }
 
     console.log('Ürün siliniyor:', params.id);
-    // Ürünü sil
+    
     await Item.findByIdAndDelete(params.id);
 
     console.log('Ürün başarıyla silindi');
