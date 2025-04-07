@@ -21,24 +21,8 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Dinamik NEXTAUTH_URL ayarı
-  const host = request.headers.get('host') || 'localhost:3000';
-  const protocol = host.includes('localhost') ? 'http' : 'https';
-  const baseUrl = `${protocol}://${host}`;
-  
-  // Environment değişkenini ayarla
-  if (!process.env.NEXTAUTH_URL) {
-    process.env.NEXTAUTH_URL = baseUrl;
-    console.log(`NEXTAUTH_URL set to: ${baseUrl}`);
-  }
-  
-  // Eğer çıkış yapma işlemiyse, callback URL'yi ana sayfaya ayarla
-  if (path.includes('/api/auth/signout')) {
-    const callbackUrl = new URL('/', baseUrl).toString();
-    const url = request.nextUrl.clone();
-    url.searchParams.set('callbackUrl', callbackUrl);
-    return NextResponse.rewrite(url);
-  }
+  // Sabit Render URL'yi her zaman ayarla
+  process.env.NEXTAUTH_URL = 'https://cloud495the1.onrender.com';
   
   return NextResponse.next();
 }
@@ -49,6 +33,9 @@ export const config = {
     '/api/auth/:path*',
     '/login',
     '/register',
-    '/admin/:path*',
+    '/admin/:path',
+    '/items/:path*',
+    '/api/items/:path*',
+    '/api/reviews/:path*',
   ],
 }; 

@@ -5,6 +5,9 @@ import { connectDB } from "./db";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 
+// Render URL'yi öncelikli olarak ayarla
+const NEXTAUTH_URL = 'https://cloud495the1.onrender.com';
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({

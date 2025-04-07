@@ -101,7 +101,7 @@ export default function HomePage() {
                     </Link>
                   )}
                   <button
-                    onClick={() => signOut({ callbackUrl: '/' })}
+                    onClick={() => signOut()}
                     className="text-red-600 hover:text-red-800"
                   >
                     Sign Out
