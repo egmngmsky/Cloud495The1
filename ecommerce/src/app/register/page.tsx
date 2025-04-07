@@ -19,7 +19,7 @@ function RegisterForm() {
     const password = formData.get('password') as string;
 
     try {
-      const res = await fetch('/api/register', {
+      const res = await fetch('https://cloud495the1.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ function RegisterForm() {
         throw new Error(data.error || 'Something went wrong');
       }
 
-      router.push('/login');
+      window.location.href = 'https://cloud495the1.onrender.com/login';
     } catch (error) {
       setError(error instanceof Error ? error.message : 'An error occurred');
     }

@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const callbackUrl = searchParams.get('callbackUrl') || 'https://cloud495the1.onrender.com/';
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +29,7 @@ function LoginForm() {
         redirect: false,
         email,
         password,
-        callbackUrl,
+        callbackUrl: 'https://cloud495the1.onrender.com/',
       });
 
       if (result?.error) {
@@ -38,8 +38,7 @@ function LoginForm() {
           : result.error);
         setIsLoading(false);
       } else if (result?.url) {
-        router.push(callbackUrl);
-        router.refresh();
+        window.location.href = 'https://cloud495the1.onrender.com/';
       }
     } catch (error) {
       console.error('Login error:', error);

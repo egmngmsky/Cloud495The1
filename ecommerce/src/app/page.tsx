@@ -34,7 +34,7 @@ export default function HomePage() {
       try {
         setLoading(true);
         setError('');
-        const res = await fetch('/api/items');
+        const res = await fetch('https://cloud495the1.onrender.com/api/items');
         if (!res.ok) {
           throw new Error('Failed to fetch items');
         }
@@ -87,21 +87,21 @@ export default function HomePage() {
                 <>
                   <span className="text-gray-600">Welcome, {session.user?.name}</span>
                   <Link
-                    href="/profile"
+                    href="https://cloud495the1.onrender.com/profile"
                     className="text-blue-600 hover:text-blue-800"
                   >
                     Profile
                   </Link>
                   {session.user?.role === 'admin' && (
                     <Link
-                      href="/admin"
+                      href="https://cloud495the1.onrender.com/admin"
                       className="text-blue-600 hover:text-blue-800"
                     >
                       Admin Panel
                     </Link>
                   )}
                   <button
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ callbackUrl: 'https://cloud495the1.onrender.com/' })}
                     className="text-red-600 hover:text-red-800"
                   >
                     Sign Out
@@ -109,7 +109,7 @@ export default function HomePage() {
                 </>
               ) : (
                 <button
-                  onClick={() => signIn()}
+                  onClick={() => signIn(undefined, { callbackUrl: 'https://cloud495the1.onrender.com/' })}
                   className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
                   Sign In
@@ -148,7 +148,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item) => (
             <Link 
-              href={`/items/${item._id}`}
+              href={`https://cloud495the1.onrender.com/items/${item._id}`}
               key={item._id} 
               className="bg-white rounded-lg shadow-md p-4 flex gap-4 hover:shadow-lg transition-shadow"
             >
