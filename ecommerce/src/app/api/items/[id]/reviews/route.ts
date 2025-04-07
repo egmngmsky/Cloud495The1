@@ -4,7 +4,7 @@ import { connectDB } from '@/lib/db';
 import { User } from '@/models/User';
 import { Item } from '@/models/Item';
 import { Review } from '@/models/Review';
-import { authOptions } from '@/lib/auth';
+import authOptions from '@/lib/auth';
 
 export async function POST(
   request: NextRequest,

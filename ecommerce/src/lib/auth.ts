@@ -5,7 +5,7 @@ import { connectDB } from "./db";
 import { User } from "../models/User";
 import bcrypt from "bcryptjs";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -72,6 +72,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+export default authOptions;
 // Helper function to get session for server components
 export async function getAuthSession() {
   return await getServerSession(authOptions);

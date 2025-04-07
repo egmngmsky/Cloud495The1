@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { Review } from '@/models/Review';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import authOptions from '@/lib/auth';
 import mongoose from 'mongoose';
 
 export async function DELETE(
