@@ -51,7 +51,7 @@ export default function ItemPageClient({ id }: { id: string }) {
       try {
         setLoading(true);
         setError('');
-        const res = await fetch(`/api/items/${id}`);
+        const res = await fetch(`https://cloud495the1.onrender.com/api/items/${id}`);
         if (!res.ok) {
           throw new Error('Failed to fetch item');
         }
@@ -76,7 +76,7 @@ export default function ItemPageClient({ id }: { id: string }) {
     }
 
     try {
-      const res = await fetch(`/api/items/${id}/reviews`, {
+      const res = await fetch(`https://cloud495the1.onrender.com/api/items/${id}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -178,6 +178,11 @@ export default function ItemPageClient({ id }: { id: string }) {
                 {item.material && (
                   <p className="text-gray-600">Material: {item.material}</p>
                 )}
+                <p className="text-gray-600">
+                  Seller: {typeof item.seller === 'object' && item.seller?.name 
+                    ? item.seller.name 
+                    : (typeof item.seller === 'string' ? item.seller : 'Unknown')}
+                </p>
               </div>
 
               {/* Rating Summary */}

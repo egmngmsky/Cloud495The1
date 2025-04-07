@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { Item } from '../../../models/Item';
 import { Review } from '../../../models/Review';
+import User from '../../../models/User';
 
 export async function GET() {
   try {
@@ -9,7 +10,7 @@ export async function GET() {
 
     const items = await Item.find({}).sort({ createdAt: -1 });
 
-    // Get reviews for each item
+    // Get reviews and seller info for each item
     const itemsWithStats = await Promise.all(
       items.map(async (item) => {
         const reviews = await Review.find({ itemId: item._id });
@@ -17,10 +18,19 @@ export async function GET() {
           ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
           : 0;
         
+        // Fetch seller info
+        let sellerInfo = 'Unknown';
+        if (item.seller) {
+          const seller = await User.findById(item.seller);
+          if (seller) {
+            sellerInfo = seller.name || seller.username || 'Unknown';
+          }
+        }
+        
         const itemObj = item.toObject();
         return {
           ...itemObj,
-          seller: itemObj.seller?.toString() || '',
+          seller: sellerInfo,
           averageRating,
           totalReviews: reviews.length
         };

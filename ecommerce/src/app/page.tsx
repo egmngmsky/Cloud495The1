@@ -168,6 +168,7 @@ export default function HomePage() {
                   {item.age && <p>Age: {item.age} years</p>}
                   {item.size && <p>Size: {item.size}</p>}
                   {item.material && <p>Material: {item.material}</p>}
+                  <p>Seller: {item.seller || 'Unknown'}</p>
                 </div>
                 <div className="mt-2 flex items-center">
                   <span className="text-yellow-400">★</span>
