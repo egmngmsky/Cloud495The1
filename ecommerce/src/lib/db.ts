@@ -11,18 +11,17 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
-interface Cached {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-}
+let globalWithMongoose = global as typeof globalThis & {
+  mongoose: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  };
+};
 
-// @ts-ignore - global mongoose
-let cached: Cached = global.mongoose || { conn: null, promise: null };
+let cached = globalWithMongoose.mongoose;
 
-// @ts-ignore - global mongoose
-if (!global.mongoose) {
-  // @ts-ignore - global mongoose
-  global.mongoose = cached;
+if (!cached) {
+  cached = globalWithMongoose.mongoose = { conn: null, promise: null };
 }
 
 export async function connectDB() {
