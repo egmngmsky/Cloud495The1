@@ -21,9 +21,23 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Eğer environment variabledan açıkça tanımlanmamışsa, host bilgisinden URL'yi oluşturuyoruz
+  const host = request.headers.get('host');
+  const protocol = host?.includes('localhost') ? 'http' : 'https';
+  
+  if (!process.env.NEXTAUTH_URL) {
+    process.env.NEXTAUTH_URL = `${protocol}://${host}`;
+  }
+  
   return NextResponse.next();
 }
 
+// Auth API routeları ve diğer dinamik routelar için middleware çalıştır
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    '/api/auth/:path*',
+    '/login',
+    '/register',
+    '/admin/:path*',
+  ],
 }; 

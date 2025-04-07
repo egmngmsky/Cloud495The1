@@ -5,6 +5,14 @@ import { connectDB } from "./db";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 
+// Dinamik URL oluştur
+const NEXTAUTH_URL = process.env.NEXTAUTH_URL || 
+  (process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : process.env.RENDER_EXTERNAL_URL 
+      ? process.env.RENDER_EXTERNAL_URL 
+      : 'http://localhost:3000');
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -70,6 +78,9 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  
+  // Dinamik URL
+  url: NEXTAUTH_URL,
 };
 
 // Helper function to get session for server components
