@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
