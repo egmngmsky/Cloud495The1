@@ -16,7 +16,7 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['localhost:3000', 'localhost:4000', '*.render.com'],
+      allowedOrigins: ['localhost:3000', 'localhost:4000', '*.onrender.com'],
     },
   },
 };
