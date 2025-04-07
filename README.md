@@ -1,4 +1,4 @@
-# E-Ticaret Uygulaması
+# Cloud495The1 - E-Ticaret Uygulaması
 
 Bu proje, çeşitli ürün kategorileri ve kullanıcı yorumları içeren bir e-ticaret uygulamasıdır.
 
@@ -20,14 +20,11 @@ Bu proje, çeşitli ürün kategorileri ve kullanıcı yorumları içeren bir e-
    npm install
    ```
 
-3. `.env.local` dosyasını oluşturun ve gerekli ortam değişkenlerini ayarlayın (ecommerce klasöründe):
+3. `.env` dosyasını düzenleyin ve gerekli ortam değişkenlerini ayarlayın (ecommerce klasöründe):
    ```
    MONGODB_URI=your_mongodb_connection_string
    NEXTAUTH_SECRET=your_nextauth_secret
    NEXTAUTH_URL=http://localhost:3000
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    ```
 
 ## Uygulamayı Çalıştırma
@@ -54,4 +51,4 @@ Uygulama http://localhost:3000 adresinde çalışacaktır.
 ## Yeni Eklenen Özellikler
 
 - Ana sayfaya dönüş butonu
-- İnceleme silme özelliği 
+- İnceleme silme özelliği
