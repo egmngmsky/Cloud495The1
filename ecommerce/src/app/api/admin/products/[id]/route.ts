@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { connectDB } from '@/lib/db';
-import { Item } from '@/models/Item';
-import { User } from '@/models/User';
-import { authOptions } from '@/lib/auth';
+import connectDB from '@/lib/mongodb';
+import Product from '@/models/Product';
+import User from '@/models/User';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function DELETE(
   request: NextRequest,
@@ -22,7 +22,7 @@ export async function DELETE(
     await connectDB();
 
     // Find the product
-    const product = await Item.findById(params.id);
+    const product = await Product.findById(params.id);
     if (!product) {
       return NextResponse.json(
         { error: 'Product not found' },
@@ -37,7 +37,7 @@ export async function DELETE(
     );
 
     // Delete the product
-    await Item.findByIdAndDelete(params.id);
+    await Product.findByIdAndDelete(params.id);
 
     return NextResponse.json(
       { message: 'Product deleted successfully' },

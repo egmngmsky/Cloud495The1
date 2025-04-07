@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { connectDB } from '@/lib/db';
-import { Item } from '@/models/Item';
-import { authOptions } from '@/lib/auth';
+import connectDB from '@/lib/mongodb';
+import Product from '@/models/Product';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function GET() {
   try {
@@ -17,8 +17,8 @@ export async function GET() {
 
     await connectDB();
 
-    const products = await Item.find({})
-      .select('name description price seller image category stock reviews')
+    const products = await Product.find({})
+      .select('name description price seller imageUrl category stock reviews')
       .lean()  // Convert documents to plain JavaScript objects
       .exec(); // Execute the query
 
@@ -36,7 +36,7 @@ export async function GET() {
         description: product.description,
         price: product.price,
         seller: product.seller,
-        image: product.image,
+        imageUrl: product.imageUrl,
         category: product.category,
         stock: product.stock,
         rating,
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       description,
       price,
       seller,
-      image,
+      imageUrl,
       category,
       stock,
       batteryLife,
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     } = await request.json();
 
     // Validate required fields
-    if (!name || !description || !price || !seller || !image || !category || stock === undefined) {
+    if (!name || !description || !price || !seller || !imageUrl || !category || stock === undefined) {
       return NextResponse.json(
         { error: 'Please provide all required fields' },
         { status: 400 }
@@ -127,12 +127,12 @@ export async function POST(request: Request) {
 
     await connectDB();
 
-    const product = await Item.create({
+    const product = await Product.create({
       name,
       description,
       price,
       seller,
-      image,
+      imageUrl,
       category,
       stock,
       batteryLife,

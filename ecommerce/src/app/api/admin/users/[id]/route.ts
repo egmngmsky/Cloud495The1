@@ -4,7 +4,6 @@ import { authOptions } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import { User } from '@/models/User';
 import { Item } from '@/models/Item';
-import { Review } from '@/models/Review';
 
 export async function DELETE(
   request: Request,
@@ -48,10 +47,6 @@ export async function DELETE(
       );
     }
 
-    // Kullanıcının yaptığı incelemeleri sil
-    console.log('Kullanıcının incelemeleri siliniyor');
-    await Review.deleteMany({ userId: params.id });
-    
     // Kullanıcıya ait ürünleri güncelle
     console.log('Kullanıcıya ait ürünler güncelleniyor');
     await Item.updateMany(

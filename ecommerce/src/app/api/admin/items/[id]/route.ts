@@ -4,7 +4,6 @@ import { authOptions } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import { User } from '@/models/User';
 import { Item } from '@/models/Item';
-import { Review } from '@/models/Review';
 
 export async function DELETE(
   request: Request,
@@ -38,10 +37,6 @@ export async function DELETE(
       console.log('Ürün bulunamadı:', params.id);
       return NextResponse.json({ error: 'Item not found' }, { status: 404 });
     }
-
-    // Ürüne ait incelemeleri sil
-    console.log('Ürüne ait incelemeler siliniyor');
-    await Review.deleteMany({ itemId: params.id });
 
     console.log('Ürün siliniyor:', params.id);
     // Ürünü sil
