@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "start": "node start.js",
-    "dev": "cd ecommerce && npm run dev"
-  },
-  "devDependencies": {
-    "ts-node": "^10.9.2"
-  }
-}
