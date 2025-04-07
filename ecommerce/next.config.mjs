@@ -15,7 +15,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'localhost:4000', '*.render.com'],
+    },
   },
 };
 
